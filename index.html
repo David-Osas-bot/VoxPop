@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoxPop — Cast Your Voice</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">VoxPop ✦</div>
+        <div class="nav-actions">
+            <div class="nav-user" id="navUser">
+                <div class="nav-avatar" id="navAvatar"></div>
+                <span class="nav-username" id="navUsername"></span>
+                <button class="btn btn-ghost btn-sm" onclick="logout()">Sign out</button>
+            </div>
+            <div id="navGuest">
+                <button class="btn btn-primary btn-sm" onclick="showAuth()">Sign in</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AUTH PAGE -->
+    <div class="page active" id="auth-page">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>VoxPop ✦</h1>
+                <p>Your voice, counted.</p>
+            </div>
+
+            <div class="tab-row">
+                <div class="tab active" onclick="switchTab('login')">Login</div>
+                <div class="tab" onclick="switchTab('register')">Register</div>
+            </div>
+
+            <div id="auth-error" class="error-msg"></div>
+            <div id="auth-success" class="success-msg"></div>
+
+            <!-- LOGIN FORM -->
+            <div id="login-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="login-username" placeholder="Enter your username" autocomplete="username" />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password"
+                        autocomplete="current-password" />
+                </div>
+                <button class="btn btn-primary btn-full" onclick="handleLogin()" id="loginBtn">Sign In</button>
+            </div>
+
+            <!-- REGISTER FORM -->
+            <div id="register-form" style="display:none">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="reg-username" placeholder="Choose a username" autocomplete="username" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="reg-email" placeholder="your@email.com" autocomplete="email" />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" placeholder="Min. 6 characters"
+                        autocomplete="new-password" />
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="reg-confirm" placeholder="Repeat password" autocomplete="new-password" />
+                </div>
+                <button class="btn btn-primary btn-full" onclick="handleRegister()" id="registerBtn">Create
+                    Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD PAGE -->
+    <div class="page" id="dashboard-page">
+        <div class="dash-header">
+            <h2>Live Polls 🗳️</h2>
+            <p>Cast your vote · Create a poll · See real-time results</p>
+        </div>
+
+        <div class="stats-bar" id="statsBar">
+            <div class="stat-chip">
+                <div class="stat-value" id="statPolls">0</div>
+                <div class="stat-label">Active Polls</div>
+            </div>
+            <div class="stat-chip">
+                <div class="stat-value" id="statVotes">0</div>
+                <div class="stat-label">Total Votes</div>
+            </div>
+            <div class="stat-chip">
+                <div class="stat-value" id="statUsers">0</div>
+                <div class="stat-label">Participants</div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary create-poll-btn" onclick="togglePollForm()">
+            <span id="createBtnText">＋ Create Poll</span>
+        </button>
+
+        <!-- POLL CREATION FORM -->
+        <div class="poll-form-panel" id="pollFormPanel">
+            <h3>New Poll</h3>
+            <div class="form-group">
+                <label>Question</label>
+                <input type="text" id="pollQuestion" placeholder="What do you want to ask?" />
+            </div>
+            <div class="form-group">
+                <label>Options</label>
+                <div class="options-list" id="optionsList"></div>
+                <button class="add-option-btn" onclick="addOption()">＋ Add option</button>
+            </div>
+            <div class="form-row">
+                <button class="btn btn-ghost" onclick="togglePollForm()">Cancel</button>
+                <button class="btn btn-primary" onclick="createPoll()">Publish Poll</button>
+            </div>
+        </div>
+
+        <!-- POLLS GRID -->
+        <div class="polls-grid" id="pollsGrid"></div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
